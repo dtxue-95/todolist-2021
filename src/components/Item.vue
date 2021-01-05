@@ -1,7 +1,7 @@
 <template>
-    <li>
+    <li v-bind:class="{completed:todo.hasCompleted}">
         <div class="view">
-            <input type="checkbox" class="toggle">
+            <input type="checkbox" class="toggle" v-model="todo.hasCompleted">
             <label>{{todo.value}}</label>
             <button class="destroy"
                 @click="removeTodo(todo.id)"

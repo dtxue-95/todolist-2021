@@ -1,8 +1,10 @@
 <template>
     <footer class="footer">
         <span class="todo-count">
+            <!-- <strong>{{todoNum<=1?"item":"items"}}</strong> -->
             <strong>{{todoNum}}</strong>
-            <span>item left</span>
+            <span v-if="todoNum<=1">item left</span>
+             <span v-else>items left</span>
         </span>
         <ul class="filters">
             <li><a href="#/all">All</a></li>
