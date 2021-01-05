@@ -8,7 +8,7 @@
       >
     </header>
     <section class="main">
-      <input type="checkbox" class="toggle-all"/>
+      <input type="checkbox" class="toggle-all" v-model="isAll"/>
       <ul class="todo-list">
         <Item v-for="value in todoDatas" v-bind:key="value.id" v-bind:todo="value"/>
       </ul>
@@ -19,6 +19,7 @@
 
 <script>
   import './css/index.css'
+  import './css/base.css'
   import Item from './components/Item'
   import Footer from './components/Footer'
   export default {
@@ -42,6 +43,19 @@
         todo.hasCompleted=false;
         this.todoDatas.push(todo);
         this.newTodo="";
+      }
+    },
+    computed:{
+      isAll:{
+        get(){
+          return this.$children.todoNum==0;
+        },
+        set(value){
+          this.todoDatas.map((todo)=>{
+            todo.hasCompleted=value;
+            return todo;
+          })
+        }
       }
     }
   }
