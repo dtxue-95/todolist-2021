@@ -7,11 +7,11 @@
              <span v-else>items left</span>
         </span>
         <ul class="filters">
-            <li><a href="#/all">All</a></li>
-            <li><a href="#/active">Active</a></li>
-            <li><a href="#/complete">Complete</a></li>
+            <li><a href="#/all" @click="filterTodo('all')">All</a></li>
+            <li><a href="#/active" @click="filterTodo('active')">Active</a></li>
+            <li><a href="#/complete" @click="filterTodo('completed')">Complete</a></li>
         </ul>
-        <button class="clear-completed">
+        <button class="clear-completed" @click="clearCompleted">
             Clear completed
         </button>
     </footer>
@@ -26,7 +26,18 @@
                     return !value.hasCompleted;
                 }).length;
             }
-        }
+        },
+        methods:{
+            filterTodo(childView){
+                //处理函数用来改变父组件中的view值
+                this.$parent.view=childView;
+            },
+            clearCompleted(){
+                this.$parent.todoDatas=this.$parent.todoDatas.filter((value)=>{
+                    return !value.hasCompleted;
+                })
+            }
+        },
     }
 </script>
 

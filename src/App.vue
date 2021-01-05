@@ -10,7 +10,7 @@
     <section class="main">
       <input type="checkbox" class="toggle-all" v-model="isAll"/>
       <ul class="todo-list">
-        <Item v-for="value in todoDatas" v-bind:key="value.id" v-bind:todo="value"/>
+        <Item v-for="(value,index) in filterTodoDatas" v-bind:key="value.id" v-bind:index="index" v-bind:todo="value"/>
       </ul>
     </section>
     <Footer/>
@@ -28,7 +28,8 @@
     data(){
       return {
         todoDatas:[], //存储所有的todo
-        newTodo:"" //存储添加新的todo.title
+        newTodo:"", //存储添加新的todo.title
+        view:"all", //过滤数据属性默认all
       }
     },
     methods:{
@@ -55,6 +56,23 @@
             todo.hasCompleted=value;
             return todo;
           })
+        }
+      },
+      filterTodoDatas(){
+        //计算属性显示过滤数据
+        switch(this.view){
+          case "all":
+            return this.todoDatas;
+          case "active":
+            return this.todoDatas.filter((value)=>{
+              return !value.hasCompleted;
+            });
+          case "completed":
+            return this.todoDatas.filter((value)=>{
+              return value.hasCompleted;
+            });
+            default:
+              return this.todoDatas;
         }
       }
     }

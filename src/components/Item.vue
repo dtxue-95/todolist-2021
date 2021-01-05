@@ -20,10 +20,11 @@
 <script>
     export default {
         name:"Item",
-        props:['todo'],
+        props:['todo','index'],
         data(){
             return {
-                editedTodo:""
+                editedTodo:"", //是否进入编辑状态的标识 editing
+                value:""   //存储修改前的todo.value
             }
         },
         methods:{
@@ -34,7 +35,7 @@
                 });
             },
             editTodo(todo){
-                this.value=todo.value;
+                this.value=todo.value; //进入编辑状态后之前的todo也存一份
                 this.editedTodo=todo;
             },
             doneTodo(){
