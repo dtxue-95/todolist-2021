@@ -1,7 +1,7 @@
 <template>
     <footer class="footer">
         <span class="todo-count">
-            <strong>0</strong>
+            <strong>{{todoNum}}</strong>
             <span>item left</span>
         </span>
         <ul class="filters">
@@ -17,7 +17,14 @@
 
 <script>
     export default {
-        name:"Footer"
+        name:"Footer",
+        computed:{
+            todoNum(){
+                return this.$parent.todoDatas.filter((value)=>{
+                    return !value.hasCompleted;
+                }).length;
+            }
+        }
     }
 </script>
 
